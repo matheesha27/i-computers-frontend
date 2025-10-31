@@ -16,10 +16,10 @@ function App() {
     <BrowserRouter>
       <div className="w-full h-screen bg-primary">
         <Routes path="/">
-          <Route path="/" element={<HomePage/>}/>
+          <Route path="/*" element={<HomePage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/register' element={<RegisterPage/>}/>
-          <Route path='/admin' element={<AdminPage/>}/>
+          <Route path='/admin/*' element={<AdminPage/>}/>
         </Routes>
       </div>
     </BrowserRouter>

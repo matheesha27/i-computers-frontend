@@ -1,8 +1,41 @@
 @import "tailwindcss";
 
 @theme {
-    --color-primary: #ECECE7;
-    --color-secondary: #F97316;
-    --color-accent: #1E3A8A;
-    --color-text: #1C2F53;
+    --color-primary: #F9FAFB;
+    --color-secondary: #1E3A8A;
+    --color-accent: #F97316;
+    --color-text: #111827;
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px; /* Scrollbar width */
+}
+
+/* Scrollbar Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Scrollbar Thumb (default) */
+::-webkit-scrollbar-thumb {
+  background-color: #9CA3AF; /* Default: neutral gray */
+  border-radius: 4px;
+  border: 2px solid #F9FAFB;
+  transition: background-color 0.3s ease; /* Smooth color change */
+}
+
+/* Scrollbar Thumb Hover - Accent Color */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #F97316; /* Accent color on hover */
+}
+
+/* Optional (for Firefox) */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #9CA3AF #F9FAFB; /* thumb | track */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #F97316;
 }
