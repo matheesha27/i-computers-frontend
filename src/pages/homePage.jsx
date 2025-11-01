@@ -9,8 +9,9 @@ export default function HomePage() {
                 <Routes>
                     <Route path="/" element={<h1>Home Page</h1>}/>
                     <Route path="/products" element={<h1>Products Page</h1>}/>
-                    <Route path="/about" element={<h1>About</h1>}/>
-                    <Route path="/contact" element={<h1>Contact Us</h1>}/>
+                    <Route path="/about" element={<h1>About Page</h1>}/>
+                    <Route path="/contact" element={<h1>Contact Us Page</h1>}/>
+                    <Route path="/*" element={<h1>404 Not Found</h1>}/>
                 </Routes>
             </div>
         </div>
