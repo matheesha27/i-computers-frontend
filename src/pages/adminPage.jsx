@@ -3,6 +3,8 @@ import { LuClipboardList } from "react-icons/lu";
 import { LuBoxes } from "react-icons/lu";
 import { TbUsers } from "react-icons/tb";
 import { MdOutlineRateReview } from "react-icons/md";
+import AdminProductsPage from "./admin/adminProductsPage";
+import AdminAddProductPage from "./admin/adminAddProductPage";
 
 export default function AdminPage() {
     return(
@@ -13,17 +15,19 @@ export default function AdminPage() {
                     <img src="logo.png" className="h-full"/>
                     <h1>Admin</h1>
                 </div>
-                <div className="w-full h-[400px] text-primary text-xl flex flex-col gap-[10px]"> {/* Sidebar-bottomMenuDiv */}
+                <div className="w-full h-[400px] text-primary text-xl flex flex-col gap-[10px] pl-[20px] pt-[20px]"> {/* Sidebar-bottomMenuDiv */}
                     <Link to="/admin" className="hover:text-accent w-full h-[40px] gap-[10px] flex items-center"><LuClipboardList />Orders</Link>
                     <Link to="/admin/products" className="hover:text-accent w-full h-[40px] gap-[10px] flex items-center"><LuBoxes />Products</Link>
                     <Link to="/admin/users" className="hover:text-accent w-full h-[40px] gap-[10px] flex items-center"><TbUsers />Users</Link>
                     <Link to="/admin/reviews" className="hover:text-accent w-full h-[40px] gap-[10px] flex items-center"><MdOutlineRateReview />Reviews</Link>
                 </div>
             </div>
-            <div className="w-[calc(100%-300px)] h-full max-h-full bg-primary border-[8px] rounded-3xl overflow-y-scroll border-secondary text-2xl"> {/* Right section - Body*/}
+
+            <div className="w-[calc(100%-300px)] h-full max-h-full bg-primary border-[8px] rounded-3xl overflow-y-scroll border-secondary"> {/* Right section - Body*/}
                 <Routes>
                     <Route path="/" element={<h1>Orders Content</h1>}/>
-                    <Route path="/products" element={<h1>Products Content</h1>}/>
+                    <Route path="/products" element={<AdminProductsPage/>}/>
+                    <Route path="/add-product" element={<AdminAddProductPage/>}/>
                     <Route path="/users" element={<h1>User Details</h1>}/>
                     <Route path="/reviews" element={<h1>Reviews Posted</h1>}/>
                 </Routes>
