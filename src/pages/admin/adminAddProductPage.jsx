@@ -214,8 +214,8 @@ export default function AdminAddProductPage() {
                     onChange={(e) => setIsAvailable(e.target.value)}
                     className="w-full h-[42px] border border-accent rounded-xl focus:outline-none focus:ring-2 focus:ring-accent px-3"
                 >
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
                 </select>
                 </div>
             </div>
