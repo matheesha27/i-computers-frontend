@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { BsPlus } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import Loader from "../../components/loader";
+import ProductDeleteButton from "../../components/productDeleteButton";
 
 export default function AdminProductsPage() {
 
@@ -21,10 +23,12 @@ export default function AdminProductsPage() {
     }, [loaded]);
 
 
-    return(
-        <div className="w-full max-h-full flex justify-center p-10 relative bg-primary text-text">
-            <div className="w-full overflow-x-auto shadow-lg rounded-xl bg-white">
-                {loaded ? <table className="w-full max-h-full text-left border-collapse">
+    return (
+    <div className="w-full max-h-full flex justify-center p-10 relative bg-primary text-text">
+
+        <div className="w-full overflow-x-auto shadow-lg rounded-xl bg-white">
+            {loaded ? (
+                <table className="w-full max-h-full text-left border-collapse">
                     <thead className="bg-secondary sticky top-0 border-b border-secondary/20"> 
                         <tr className="text-primary">
                             <th className="p-4">Image</th>
@@ -83,44 +87,30 @@ export default function AdminProductsPage() {
                                 </td>
 
                                 <td className="p-4">{item.stock}</td>
-                                <td className="p-4">
-                                    <button
-                                        className="w-[100px] bg-red-500 text-primary flex justify-center items-center p-2 rounded-lg cursor-pointer hover:bg-red-600"
-                                        onClick={() => {
-                                            const token = localStorage.getItem("token");
-                                            axios.delete(
-                                                "http://localhost:3000/api/products/" + item.productId,
-                                                {
-                                                    headers: {
-                                                        Authorization: "Bearer " + token
-                                                    }
-                                                }
-                                            ).then(() => {
-                                                toast.success("Product deleted succeffully")
-                                                setLoaded(false)
-                                            })
-                                        }}
-                                    >
-                                        Delete
-                                    </button>
 
+                                <td className="p-4">
+                                    <ProductDeleteButton productId={item.productId} reload={() => {setLoaded(false)}}/>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
-                </table> : <div className="w-full h-screen fixed top-0 left-0 bg-black/40 flex justify-center items-center">
-                <div className="w-[80px] h-[80px] border-4 border-accent border-t-transparent rounded-full animate-spin"></div></div>}
-            </div>
-
-            <Link
-                to="/admin/add-product"
-                className="fixed right-6 bottom-6 w-[55px] h-[55px] flex justify-center items-center 
-                        text-5xl rounded-full border-2 border-secondary
-                        text-secondary bg-primary shadow-xl
-                        hover:bg-secondary hover:text-primary transition-all"
-            >
-                <BsPlus />
-            </Link>
+                </table>
+            ) : (
+                <Loader />
+            )}
         </div>
-    )
+
+        {/* Floating Add Button */}
+        <Link
+            to="/admin/add-product"
+            className="fixed right-6 bottom-6 w-[55px] h-[55px] flex justify-center items-center 
+                      text-5xl rounded-full border-2 border-secondary
+                      text-secondary bg-primary shadow-xl
+                      hover:bg-secondary hover:text-primary transition-all"
+        >
+            <BsPlus />
+        </Link>
+    </div>
+);
+
 }
