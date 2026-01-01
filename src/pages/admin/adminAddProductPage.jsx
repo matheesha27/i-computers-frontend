@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react"
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import uploadFile from "../../utils/mediaUpload";
 
 export default function AdminAddProductPage() {
     const [productId, setProductId] = useState("");
@@ -10,7 +11,7 @@ export default function AdminAddProductPage() {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(0);
     const [labeledPrice, setLabeledPrice] = useState(0);
-    const [images, setImages] = useState(""); // can store URLs or file paths
+    const [files, setFiles] = useState([]);
     const [category, setCategory] = useState("");
     const [model, setModel] = useState("Standard");
     const [brand, setBrand] = useState("No brand");
@@ -28,6 +29,19 @@ export default function AdminAddProductPage() {
             return
         }
 
+        // Uploading image files to database
+        console.log(files)
+        const imagePromises = []
+        for(let i = 0; i < files.length; i++) {
+            const promise = uploadFile(files[i])
+            imagePromises.push(promise)
+        }
+        const images = await Promise.all(imagePromises).catch((error) => {
+            toast.error("Error uploading images")
+            console.log("Error uploading images")
+            return
+        })
+
         if (productId == "" || name == "" || description == "" || category == "" || brand == "" || model == "") {
             toast.error("Please fill all required fields.")
             return
@@ -35,7 +49,6 @@ export default function AdminAddProductPage() {
 
         try {
             const alternativeNamesInArray = alternativeNames.split(",")
-            const imagesInArray = images.split(",")
 
             await axios.post("http://localhost:3000/api/products", {
                 productId: productId,
@@ -44,7 +57,7 @@ export default function AdminAddProductPage() {
                 description: description,
                 price: price,
                 labeledPrice: labeledPrice,
-                images: imagesInArray,
+                images: images,
                 category: category,
                 model: model,
                 brand: brand,
@@ -141,12 +154,12 @@ export default function AdminAddProductPage() {
                 <div className="col-span-2">
                 <label className="block mb-1 font-medium text-gray-700">Images</label>
                 <input
-                    type="text"
+                    type="file"
                     className="w-full h-[42px] border border-accent rounded-xl focus:outline-none focus:ring-2 focus:ring-accent px-3"
-                    value={images}
-                    onChange={(e) => setImages(e.target.value)}
+                    multiple={true}
+                    onChange={(e) => setFiles(e.target.files)}
                 />
-                <p className="text-sm text-gray-500 text-right">Add image URLs separated by commas</p>
+                {/* <p className="text-sm text-gray-500 text-right">Add image URLs separated by commas</p> */}
                 </div>
 
                 {/* Category */}
