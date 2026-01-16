@@ -34,7 +34,7 @@ export default function ProductDeleteButton(props) {
     }
     return (
         <>
-        <button className="w-[80px] bg-red-500 text-primary flex justify-center items-center p-2 rounded-lg cursor-pointer hover:bg-red-600"
+        <button className="w-[55px] bg-red-500 text-primary flex justify-center items-center p-2 rounded-lg cursor-pointer hover:bg-red-600"
                 onClick={() => {
                     setIsMessageOpen(true)
                 }}>

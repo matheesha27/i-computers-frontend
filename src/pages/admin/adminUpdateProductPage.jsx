@@ -1,29 +1,35 @@
 import axios from "axios";
 import { useState } from "react"
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import uploadFile from "../../utils/mediaUpload";
 
-export default function AdminAddProductPage() {
-    const [productId, setProductId] = useState("");
-    const [name, setName] = useState("");
-    const [alternativeNames, setAlternativeNames] = useState();
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState(0);
-    const [labeledPrice, setLabeledPrice] = useState(0);
-    const [files, setFiles] = useState([]);
-    const [category, setCategory] = useState("");
-    const [model, setModel] = useState("Standard");
-    const [brand, setBrand] = useState("No brand");
-    const [stock, setStock] = useState(0);
-    const [isAvailable, setIsAvailable] = useState(false);
+export default function AdminUpdateProductPage() {
+    const location = useLocation(); // holds data brought from the previous page
+    const [productId, setProductId] = useState(location.state.productId);
+    const [name, setName] = useState(location.state.name);
+    const [alternativeNames, setAlternativeNames] = useState(location.state.alternativeNames.join(","));
+    const [description, setDescription] = useState(location.state.description);
+    const [price, setPrice] = useState(location.state.price);
+    const [labeledPrice, setLabeledPrice] = useState(location.state.labeledPrice);
+    const [files, setFiles] = useState([])
+    const [category, setCategory] = useState(location.state.category);
+    const [model, setModel] = useState(location.state.model);
+    const [brand, setBrand] = useState(location.state.brand);
+    const [stock, setStock] = useState(location.state.stock);
+    const [isAvailable, setIsAvailable] = useState(location.state.isAvailable);
     const navigate = useNavigate();
 
-    async function addProduct() {
+    if(!location.state) {
+        window.location.href = "/admin/products"
+    }
+
+
+    async function updateProduct() {
         const token = localStorage.getItem("token")
         
         if (token == null) {
-            toast.error("You must be logged in as Admin to add products.")
+            toast.error("You must be logged in as Admin to update products.")
             navigate("/login")
             return
         }
@@ -34,11 +40,15 @@ export default function AdminAddProductPage() {
             const promise = uploadFile(files[i])
             imagePromises.push(promise)
         }
-        const images = await Promise.all(imagePromises).catch((error) => {
+        let images = await Promise.all(imagePromises).catch((error) => {
             toast.error("Error uploading images")
             console.log("Error uploading images")
             return
         })
+
+        if(images.length == 0) {
+            images = location.state.images
+        }
 
         if (productId == "" || name == "" || description == "" || category == "" || brand == "" || model == "") {
             toast.error("Please fill all required fields.")
@@ -48,7 +58,7 @@ export default function AdminAddProductPage() {
         try {
             const alternativeNamesInArray = alternativeNames.split(",")
 
-            await axios.post("http://localhost:3000/api/products", {
+            await axios.put("http://localhost:3000/api/products" + productId, {
                 productId: productId,
                 name: name,
                 alternativeNames: alternativeNamesInArray,
@@ -68,7 +78,7 @@ export default function AdminAddProductPage() {
                 }
             }
         )
-        toast.success("Product added successfully")
+        toast.success("Product updated successfully")
 
         } catch(error) {
             toast.error()
@@ -79,7 +89,7 @@ export default function AdminAddProductPage() {
         <div className="w-full h-full p-10 flex justify-center items-start overflow-y-scroll bg-gray-50">
             {/* Form container */}
             <div className="w-[850px] bg-white p-8 rounded-2xl shadow-lg">
-            <h2 className="text-2xl font-bold text-center text-accent mb-8">Add New Product</h2>
+            <h2 className="text-2xl font-bold text-center text-accent mb-8">Update Product</h2>
 
             {/* Inputs grid */}
             <div className="grid grid-cols-2 gap-x-8 gap-y-6">
@@ -87,12 +97,12 @@ export default function AdminAddProductPage() {
                 <div>
                 <label className="block mb-1 font-medium text-gray-700">Product ID</label>
                 <input
+                    disabled={true}
                     type="text"
                     className="w-full h-[42px] border border-accent rounded-xl focus:outline-none focus:ring-2 focus:ring-accent px-3"
                     value={productId}
                     onChange={(e) => setProductId(e.target.value)}
                 />
-                <p className="text-sm text-gray-500 text-right">Provide a unique ID</p>
                 </div>
 
                 {/* Name */}
@@ -157,7 +167,6 @@ export default function AdminAddProductPage() {
                     multiple={true}
                     onChange={(e) => setFiles(e.target.files)}
                 />
-                {/* <p className="text-sm text-gray-500 text-right">Add image URLs separated by commas</p> */}
                 </div>
 
                 {/* Category */}
@@ -242,9 +251,9 @@ export default function AdminAddProductPage() {
 
                 <button
                     className="w-1/2 h-[45px] bg-accent text-white font-semibold rounded-xl shadow-md hover:bg-accent/80 transition"
-                    onClick={addProduct}
+                    onClick={updateProduct}
                 >
-                    Add Product
+                    Update Product
                 </button>
             </div>
             </div>

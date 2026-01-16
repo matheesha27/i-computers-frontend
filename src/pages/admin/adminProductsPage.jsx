@@ -88,7 +88,13 @@ export default function AdminProductsPage() {
 
                                 <td className="p-4">{item.stock}</td>
 
-                                <td className="p-4">
+                                <td className="p-4 flex items-center gap-3">
+                                    <Link to="/admin/update-product"
+                                        className="inline-flex w-[55px] bg-accent/85 text-primary justify-center items-center p-2 rounded-lg cursor-pointer hover:bg-accent"
+                                        state={item}
+                                        >
+                                        Edit
+                                    </Link>
                                     <ProductDeleteButton productId={item.productId} reload={() => {setLoaded(false)}}/>
                                 </td>
                             </tr>
