@@ -32,7 +32,7 @@ export default function ProductCard(props) {
                     {product.description}
                 </p>
 
-                <Link to="/overview" className="mt-auto w-full rounded-lg bg-amber-600 text-white py-2 text-sm font-medium
+                <Link to={"/overview/" + product.productId} className="mt-auto w-full rounded-lg bg-amber-600 text-white py-2 text-sm font-medium
                                    hover:bg-amber-500 transition flex items-center justify-center">
                     View Details
                 </Link>
