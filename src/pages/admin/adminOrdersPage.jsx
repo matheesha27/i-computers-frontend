@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Loader from "../../components/loader";
+import ViewOrderInfo from "../../components/viewOrderInfo";
 
 export default function AdminOrdersPage() {
 
@@ -67,7 +68,7 @@ export default function AdminOrdersPage() {
                                     LKR {order.total.toLocaleString()}
                                 </td>
                                 <td className="p-4">
-                                    
+                                    <ViewOrderInfo order={order}/>
                                 </td>
                             </tr>
                         ))}
