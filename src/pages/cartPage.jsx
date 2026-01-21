@@ -57,7 +57,7 @@ export default function CartPage() {
                         Checkout
                 </Link>
                 <span className="italic text-primary font-bold text-2xl mr-5 shadow-2xl">
-                    Total = LKR {getCartTotal().toFixed(2)}
+                    Total = LKR {getCartTotal().toLocaleString()}
                 </span>
             </div>
         </div>

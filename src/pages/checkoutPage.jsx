@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CgChevronUp } from "react-icons/cg";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 export default function CheckoutPage() {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const [name, setName] = useState("");
+    const [address, setAddress] = useState("");
+    const [phone, setPhone] = useState("");
     const [cart, setCart] = useState(location.state);
 
     if (location.state == null) {
@@ -22,6 +27,43 @@ export default function CheckoutPage() {
         )
         return total
     }
+
+    async function submitOrder() {
+        const token = localStorage.getItem("token");
+        if (token == null) {
+            toast.error("You must log in to place an order")
+            navigate("/login");
+            return
+        }
+    
+
+    const orderItems = []
+
+    cart.forEach((item) => {
+        orderItems.push(
+            {
+                productId: item.productId,
+                quantity: item.quantity
+            }
+        )
+    });
+
+    axios.post("http://localhost:3000/api/orders", {
+        name: name,
+        address: address,
+        phone: phone,
+        items: orderItems
+    }, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then((response) => {
+        toast.success("Order placed successfully");
+        navigate("/orders");
+    }).catch((error) => {
+        toast.error("Error placing the order");
+    })
+}
     
     return(
         <div className="w-full flex flex-col items-center p-[20px]">
@@ -70,13 +112,45 @@ export default function CheckoutPage() {
                     }
                 )
             }
+            <div className="w-[50%] h-[240px] p-4 rounded-xl overflow-hidden shadow-2xl my-1 flex flex-wrap items-center px-6 bg-accent/25 justify-between">
+                <div className="w-full flex gap-x-6">
+                    <div className="w-[50%] flex flex-col">
+                        <label className="text-md font-semibold">Name</label>
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={(e) => {setName(e.target.value)}}
+                            className="px-6 py-3 rounded border-2 border-accent/60 focus:border-accent focus:border-3 outline-none"    
+                        />
+                    </div>
+                    <div className="w-[50%] flex flex-col">
+                        <label className="text-md font-semibold">Contact</label>
+                        <input
+                            type="text"
+                            value={phone}
+                            onChange={(e) => {setPhone(e.target.value)}}
+                            className="px-6 py-3 rounded border-2 border-accent/60 focus:border-accent focus:border-3 outline-none"    
+                        />
+                    </div>
+                </div>
+                <div className="w-full flex flex-col">
+                    <label className="text-md font-semibold">Address</label>
+                    <textarea
+                        type="text"
+                        value={address}
+                        onChange={(e) => {setAddress(e.target.value)}}
+                        className="px-6 py-3 rounded border-2 border-accent/60 focus:border-accent focus:border-3 outline-none"    
+                    />
+                </div>
+            </div>
             <div className="w-[50%] h-[120px] rounded-xl overflow-hidden shadow-2xl my-1 flex items-center px-6 bg-accent justify-between">
                 <button
-                    className="self center ml-4 px-6 py-3 rounded bg-secondary italic text-primary font-bold border-2 border-secondary hover:bg-secondary/90 transition shadow">
+                    className="self center ml-4 px-6 py-3 rounded bg-secondary italic text-primary font-bold border-2 border-secondary hover:bg-secondary/90 transition shadow"
+                    onClick={submitOrder}>
                         Order Now
                 </button>
                 <span className="italic text-primary font-bold text-2xl mr-5 shadow-2xl">
-                    Total = LKR {getCartTotal().toFixed(2)}
+                    Total = LKR {getCartTotal().toLocaleString()}
                 </span>
             </div>
         </div>
