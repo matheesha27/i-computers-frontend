@@ -4,8 +4,9 @@ import { useState } from "react";
 // https://qnhnymujzdqqwdcjfqia.supabase.co
     // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuaG55bXVqemRxcXdkY2pmcWlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYwNTcyNjcsImV4cCI6MjA4MTYzMzI2N30.TJNx6rG66y5lvlRwN1RMBpkeLgGlq4HhCFQk5tZDGpA
 export default function Test() {
+
     return (
-        <div className="w-full h-full flex flex-col justify-center items-center">
+        <div className="w-full h-full bg-red-500">
             Hello Test
         </div>
     )
