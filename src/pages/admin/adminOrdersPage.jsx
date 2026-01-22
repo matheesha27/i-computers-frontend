@@ -24,6 +24,16 @@ export default function AdminOrdersPage() {
     }
     }, [loaded]);
 
+    function handleStatusUpdate(orderId, newStatus) {
+        setOrders(prevOrders =>
+            prevOrders.map(order =>
+                order.orderId === orderId
+                    ? { ...order, status: newStatus }
+                    : order
+            )
+        );
+    }
+
 
     return (
     <div className="w-full max-h-full flex justify-center p-10 relative bg-primary text-text">
@@ -68,7 +78,10 @@ export default function AdminOrdersPage() {
                                     LKR {order.total.toLocaleString()}
                                 </td>
                                 <td className="p-4">
-                                    <ViewOrderInfo order={order}/>
+                                    <ViewOrderInfo
+                                        order={order}
+                                        onStatusUpdated={handleStatusUpdate}
+                                    />
                                 </td>
                             </tr>
                         ))}

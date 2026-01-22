@@ -1,10 +1,13 @@
 import { useState } from "react";
 import Modal from "react-modal";
+import axios from "axios";
+import toast from "react-hot-toast";
 
-export default function ViewOrderInfo({ order }) {
+export default function ViewOrderInfo({ order, onStatusUpdated }) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedStatus, setSelectedStatus] = useState(order.status);
+    const [currentStatus, setCurrentStatus] = useState(order.status);
 
     async function updateOrderStatus() {
         try {
@@ -21,7 +24,8 @@ export default function ViewOrderInfo({ order }) {
             );
 
             toast.success("Order status updated");
-            order.status = selectedStatus; // update UI immediately
+            setCurrentStatus(selectedStatus);
+            onStatusUpdated(order.orderId, selectedStatus);
 
         } catch (error) {
             toast.error("Failed to update order status");
@@ -104,13 +108,21 @@ export default function ViewOrderInfo({ order }) {
 
                         <div className="flex justify-between items-center">
                             <span className="font-medium">Status</span>
-                            <span className={`px-3 py-1 rounded-full text-sm font-semibold
-                                ${order.status === "COMPLETED" ? "bg-green-100 text-green-700" :
-                                order.status === "PENDING" ? "bg-yellow-100 text-yellow-700" :
-                                "bg-red-100 text-red-700"}`}>
-                                {order.status}
+                            <span
+                                className={`px-3 py-1 rounded-full text-sm font-semibold transition
+                                    ${currentStatus === "COMPLETED"
+                                        ? "bg-green-100 text-green-700"
+                                        : currentStatus === "PENDING"
+                                        ? "bg-yellow-100 text-yellow-700"
+                                        : currentStatus === "PROCESSING"
+                                        ? "bg-blue-100 text-blue-700"
+                                        : "bg-red-100 text-red-700"
+                                    }`}
+                            >
+                                {currentStatus}
                             </span>
                         </div>
+
 
                         <div className="flex justify-between border-t pt-3 mt-3">
                             <span className="font-semibold text-lg">Total Amount</span>
@@ -180,11 +192,9 @@ export default function ViewOrderInfo({ order }) {
                         <div className="flex items-center gap-4">
                             {/* Status Selector */}
                             <select
-                                value={order.status}
+                                value={selectedStatus}
                                 onChange={(e) => setSelectedStatus(e.target.value)}
-                                className="px-4 py-2 rounded-lg border
-                                        border-gray-300 focus:outline-none
-                                        focus:ring-2 focus:ring-accent"
+                                className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent"
                             >
                                 <option value="PENDING">Pending</option>
                                 <option value="PROCESSING">Processing</option>
@@ -196,7 +206,7 @@ export default function ViewOrderInfo({ order }) {
                             <button
                                 className="px-6 py-2 rounded-lg bg-accent text-white font-medium hover:bg-accent/90 transition disabled:opacity-50 cursor-pointer"
                                 onClick={updateOrderStatus}
-                                disabled={selectedStatus === order.status}
+                                disabled={selectedStatus === currentStatus}
                             >
                                 Update Status
                             </button>
