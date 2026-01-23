@@ -18,7 +18,6 @@ export default function AdminOrdersPage() {
         })
             .then((response) => {
                 setOrders(response.data);
-                console.log(response.data);
                 setLoaded(true);
             });
     }

@@ -39,13 +39,16 @@ export default function ProductOverviewPage() {
         }
         {
             status == "success" &&
-            <div className="w-full h-[calc(100vh-100px)] flex">
-                <div className="w-1/2 h-full flex justify-center items-center">
+            <div className="w-full h-[calc(100vh-100px)] flex flex-col lg:flex-row">
+                <h1 className="lg:hidden m-2 text-3xl font-semibold text-gray-900 text-center sticky top-0 bg-white">
+                    {product.name}
+                </h1>
+                <div className="lg:w-1/2 w-full h-full flex justify-center items-center">
                     <ImageSlider images={product.images}/>
                 </div>
-                <div className="mt-5 flex flex-col gap-6">
+                <div className="m-4 mt-5 flex flex-col gap-6">
                     <div>
-                        <h1 className="text-4xl font-semibold text-gray-900">
+                        <h1 className="hidden lg:block text-4xl font-semibold text-gray-900">
                             {product.name}
                         </h1>
 
@@ -74,7 +77,7 @@ export default function ProductOverviewPage() {
                         </span>
                     </div>
 
-                    <div className="w-[400px] flex gap-4 mt-4">
+                    <div className="w-[400px] flex gap-4 mt-4 mb-4">
                         <button className="flex-1 bg-secondary text-white py-3 rounded-lg font-medium
                                            hover:bg-secondary/80 transition" onClick={() => {
                                             addToCart(product, 1)

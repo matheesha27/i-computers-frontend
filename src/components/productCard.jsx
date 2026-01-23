@@ -5,9 +5,7 @@ export default function ProductCard(props) {
     const product = props.product
 
     return(
-        <div className="w-64 bg-amber-50 rounded-2xl shadow-md hover:shadow-xl transition flex flex-col">
-            
-            {/* Product Image */}
+        <Link to={"/overview/" + product.productId} className="w-64 bg-amber-50 rounded-2xl shadow-md hover:shadow-xl transition flex flex-col">
             <div className="h-40 w-full overflow-hidden bg-gray-100">
                 <img
                     src={product.images?.[0] || "/placeholder.png"}
@@ -15,8 +13,6 @@ export default function ProductCard(props) {
                     className="h-full w-full object-cover hover:scale-105 transition-transform-300"
                 />
             </div>
-
-            {/* Product Details */}
             <div className="p-4 flex flex-col flex-grow">
                 <h2 className="text-lg font-semibold text-gray-800 truncate">
                     {product.name}
@@ -32,11 +28,11 @@ export default function ProductCard(props) {
                     {product.description}
                 </p>
 
-                <Link to={"/overview/" + product.productId} className="mt-auto w-full rounded-lg bg-amber-600 text-white py-2 text-sm font-medium
+                <button to={"/overview/" + product.productId} className="mt-auto w-full rounded-lg bg-amber-600 text-white py-2 text-sm font-medium
                                    hover:bg-amber-500 transition flex items-center justify-center">
                     View Details
-                </Link>
+                </button>
             </div>
-        </div>
+        </Link>
     );
 }
