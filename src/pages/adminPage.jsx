@@ -15,13 +15,14 @@ export default function AdminPage() {
 
     const [user, setUser] = useState(null);
 
+    // check whether the user is an admin or customer, and navigate
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token == null) {
             window.location.href = "/login";
             return
         }
-        axios.get("http://localhost:3000/api" + "/user",
+        axios.get(import.meta.env.VITE_BACKEND_URL + "/api/user",
             {
                 headers: {
                     Authorization: `Bearer ${token}`

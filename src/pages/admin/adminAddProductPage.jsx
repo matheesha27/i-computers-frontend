@@ -68,7 +68,8 @@ export default function AdminAddProductPage() {
                 }
             }
         )
-        toast.success("Product added successfully")
+        toast.success("Product added successfully");
+        navigate("/admin/products");
 
         } catch(error) {
             toast.error()

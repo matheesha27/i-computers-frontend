@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import UserData from "./userData";
 import { BiShoppingBag } from "react-icons/bi";
 import { CiMenuBurger } from "react-icons/ci";
 import { useState } from "react";
 import { LuListCollapse } from "react-icons/lu";
+import UserData from "./userData";
 
 export default function Header() {
 
@@ -19,7 +19,10 @@ export default function Header() {
                 <Link to="/about" className="hover:text-accent">About</Link>
                 <Link to="/contact" className="hover:text-accent">Contact Us</Link>
             </div>
-            <Link to="cart" className="absolute right-4 top-1/2 translate-y-1/2 text-primary text-2xl">
+            <div className="absolute h-full right-24 top-0 items-center hidden lg:flex">
+                <UserData/>
+            </div>
+            <Link to="/cart" className="absolute right-4 top-1/2 translate-y-1/2 text-primary text-2xl">
                 <BiShoppingBag/>
             </Link>
             {sideBarOpen&&<div className="fixed w-[100vw] h-screen top-0 left-0 bg-black/40 z-20 transition-all duration-300">
@@ -34,6 +37,9 @@ export default function Header() {
                             <a href="/products" onClick={() => {setSideBarOpen(false)}} className="w-full px-4 py-4 hover:bg-secondary transition">Products</a>
                             <a href="/about" onClick={() => {setSideBarOpen(false)}} className="w-full px-4 py-4 hover:bg-secondary transition">About</a>
                             <a href="/contact" onClick={() => {setSideBarOpen(false)}} className="w-full px-4 py-4 hover:bg-secondary transition">Contact</a>
+                            <div className="flex justify-center bg-secondary p-2 rounded-full">
+                                <UserData/>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -2,10 +2,10 @@ import { useState } from "react"
 import { createClient } from "@supabase/supabase-js"
 import uploadFile from "../utils/mediaUpload"
 
-const url = "https://qnhnymujzdqqwdcjfqia.supabase.co"
-const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuaG55bXVqemRxcXdkY2pmcWlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYwNTcyNjcsImV4cCI6MjA4MTYzMzI2N30.TJNx6rG66y5lvlRwN1RMBpkeLgGlq4HhCFQk5tZDGpA'
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
-const supabase = createClient(url, key)
+export const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function TestPage() {
 

@@ -1,9 +1,11 @@
 import { createClient } from "@supabase/supabase-js"
+import { supabase } from "../lib/supabase";
+
 
 const url = "https://qnhnymujzdqqwdcjfqia.supabase.co"
 const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuaG55bXVqemRxcXdkY2pmcWlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYwNTcyNjcsImV4cCI6MjA4MTYzMzI2N30.TJNx6rG66y5lvlRwN1RMBpkeLgGlq4HhCFQk5tZDGpA'
 
-const supabase = createClient(url, key)
+// const supabase = createClient(url, key)
 
 export default function uploadFile(file) {
     return new Promise(
