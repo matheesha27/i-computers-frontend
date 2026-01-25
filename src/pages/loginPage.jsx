@@ -4,12 +4,13 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { GrGoogle } from "react-icons/gr";
 import { Link, useNavigate } from "react-router-dom";
+import Loader from "../components/loader";
 
 export default function LoginPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isLoading, setIsLoading] = useState();
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const googleLogin = useGoogleLogin({
         onSuccess: (response) => {
@@ -18,13 +19,15 @@ export default function LoginPage() {
             axios.post(import.meta.env.VITE_BACKEND_URL + "/api/user/google-login", {
                 token: response.access_token,
             }).then((res) => {
-                localStorage.setItem("token", token);
+                localStorage.setItem("token", res.data.token);
                 if (res.data.role == "admin") {
                     navigate("/admin");
                 } else {
                     navigate("/");
                 }
                 console.log("Google Access Token sent")
+                toast.success("Login successfull!");
+                setIsLoading(false);
             }).catch((error) => {
                 console.log(error)
             });
