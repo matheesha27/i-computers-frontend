@@ -25,25 +25,51 @@ export default function Header() {
             <Link to="/cart" className="absolute right-4 top-1/2 translate-y-1/2 text-primary text-2xl">
                 <BiShoppingBag/>
             </Link>
-            {sideBarOpen&&<div className="fixed w-[100vw] h-screen top-0 left-0 bg-black/40 z-20 transition-all duration-300">
-                <div className="w-[250px] h-screen flex flex-col relative">
-                    <div className="absolute w-full h-full bg-secondary/90 left-[-250px] transform-flat translate-x-[250px] transition-transform duration-700 flex flex-col">
-                        <div className="w-full h-[100px] bg-secondary flex justify-center items-center">
-                            <img src="/logo.png" className="h-full" alt="logo"/>
-                            <LuListCollapse onClick={() => {setSideBarOpen(false)}} className="text-white my-auto text-2xl ml-6 lg:hidden rotate-180"/>
-                        </div>
-                        <div className="w-full h-full flex flex-col text-xl text-primary justify-start items-start">
-                            <a href="/" onClick={() => {setSideBarOpen(false)}} className="w-full px-4 py-4 hover:bg-secondary transition">Home</a>
-                            <a href="/products" onClick={() => {setSideBarOpen(false)}} className="w-full px-4 py-4 hover:bg-secondary transition">Products</a>
-                            <a href="/about" onClick={() => {setSideBarOpen(false)}} className="w-full px-4 py-4 hover:bg-secondary transition">About</a>
-                            <a href="/contact" onClick={() => {setSideBarOpen(false)}} className="w-full px-4 py-4 hover:bg-secondary transition">Contact</a>
-                            <div className="flex justify-center bg-secondary p-2 rounded-full">
-                                <UserData/>
+
+            {sideBarOpen &&
+                <div className="fixed w-[100vw] h-screen top-0 left-0 bg-black/40 z-20 transition-all duration-300">
+                    <div className="w-[250px] h-screen flex flex-col relative">
+                        <div className="absolute w-full h-full bg-secondary/90 left-[-250px] transform-flat translate-x-[250px] transition-transform duration-700 flex flex-col">
+                            
+                            <div className="w-full h-[100px] bg-secondary flex justify-center items-center">
+                                <img src="/logo.png" className="h-full" alt="logo"/>
+                                <LuListCollapse onClick={() => {setSideBarOpen(false)}} className="text-white my-auto text-2xl ml-6 lg:hidden rotate-180"/>
                             </div>
+
+                            <div className="w-full h-full flex flex-col text-xl text-primary justify-start items-start">
+                                <a href="/"
+                                    onClick={() => {setSideBarOpen(false)}}
+                                    className="w-full px-4 py-4 hover:bg-secondary transition">
+                                        Home
+                                </a>
+
+                                <a href="/products"
+                                    onClick={() => {setSideBarOpen(false)}}
+                                    className="w-full px-4 py-4 hover:bg-secondary transition">
+                                        Products
+                                </a>
+
+                                <a href="/about"
+                                    onClick={() => {setSideBarOpen(false)}}
+                                    className="w-full px-4 py-4 hover:bg-secondary transition">
+                                        About
+                                </a>
+
+                                <a href="/contact"
+                                    onClick={() => {setSideBarOpen(false)}}
+                                    className="w-full px-4 py-4 hover:bg-secondary transition">
+                                        Contact
+                                </a>
+                                
+                                <div className="w-full flex justify-center bg-secondary py-2">
+                                    <UserData/>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
-            </div>}
+            }
         </header>
     )
 }

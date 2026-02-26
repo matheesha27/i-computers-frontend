@@ -68,7 +68,7 @@ export default function RegisterPage() {
                 <h1 className="text-5xl font-semibold text-accent shadow-4xl">
                     Plug In. Power Up. Plugin.
                 </h1>
-                <p className="text-[30px] text-[#F9FAFB] font-semibold italic m-[30px]">
+                <p className="text-[28px] text-[#F9FAFB] font-semibold italic m-[30px]">
                     Your Ultimate Destination for Computers
                 </p>
             </div>

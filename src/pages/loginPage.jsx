@@ -79,7 +79,7 @@ export default function LoginPage() {
                 <h1 className="text-5xl font-semibold text-accent shadow-4xl">
                     Plug In. Power Up. Plugin.
                 </h1>
-                <p className="text-[30px] text-[#F9FAFB] font-semibold italic m-[30px]">
+                <p className="text-[28px] text-[#F9FAFB] font-semibold italic m-[30px]">
                     Your Ultimate Destination for Computers
                 </p>
             </div>
@@ -110,6 +110,13 @@ export default function LoginPage() {
                         placeholder="Password"
                         className="w-[80%] h-[50px] mt-[20px] rounded-lg border border-accent p-[10px] text-[20px] text-primary font-light placeholder:text-primary/80 focus:outline-none focus:ring-2 focus:ring-accent"
                     />
+                    <p
+                        className="w-full mr-[20%] text-primary text-right not-italic mt-2">
+                            Forgot your password?
+                            <Link to="/register" className="text-accent italic font-semibold">
+                                Reset password
+                            </Link>
+                    </p>
                     <button
                         onClick={login}
                         className="w-[80%] h-[50px] mt-[20px] rounded-lg border bg-accent border-accent p-[10px] text-[20px] text-black font-bold focus:outline-none focus:ring-2 focus:ring-accent hover:bg-transparent hover:text-primary cursor-pointer transition-all duration-200">
