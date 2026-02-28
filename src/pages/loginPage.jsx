@@ -113,7 +113,7 @@ export default function LoginPage() {
                     <p
                         className="w-full mr-[20%] text-primary text-right not-italic mt-2">
                             Forgot your password?
-                            <Link to="/register" className="text-accent italic font-semibold">
+                            <Link to="/forgot-password" className="text-accent italic font-semibold">
                                 Reset password
                             </Link>
                     </p>

@@ -30,7 +30,7 @@ export default function UserData() {
             {
                 user ?
                 <div className="w-[150px] flex flex-row">
-                    <img src={user.image} className="w-[50px] h-[50px] rounded-full"/>
+                    <img src={user.image} referrerPolicy="no-referrer" className="w-[50px] h-[50px] rounded-full"/>
                     <select className="bg-transparent outline-none ml-2 mt-2 text-md font-semibold text-primary"
                             onChange={
                                 (e) => {

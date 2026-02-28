@@ -13,10 +13,11 @@ import AdminPage from './pages/adminPage'
 import TestPage from './pages/test'
 import { Toaster } from 'react-hot-toast'
 import { GoogleOAuthProvider } from '@react-oauth/google'
+import ForgotPasswordPage from './pages/forgotPasswordPage'
 
 function App() {
   return(
-    <GoogleOAuthProvider clientId="605443776416-01p18gac14oe1pv6ahcakcgv3sbusksl.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <BrowserRouter>
       <Toaster position='top-right'/>
         <div className="w-full h-screen bg-primary">
@@ -26,6 +27,7 @@ function App() {
             <Route path='/register' element={<RegisterPage/>}/>
             <Route path='/admin/*' element={<AdminPage/>}/>
             <Route path='/test' element={<TestPage/>}/>
+            <Route path='/forgot-password' element={<ForgotPasswordPage/>}/>
           </Routes>
         </div>
       </BrowserRouter>
