@@ -4,6 +4,7 @@ import ProductsPage from "./productsPage";
 import ProductOverviewPage from "./productOverviewPage";
 import CartPage from "./cartPage";
 import CheckoutPage from "./checkoutPage";
+import OrdersPage from "./ordersPage";
 
 export default function HomePage() {
     return(
@@ -18,6 +19,7 @@ export default function HomePage() {
                     <Route path="/overview/:productId" element={<ProductOverviewPage/>}/>
                     <Route path="/cart" element={<CartPage/>}/>
                     <Route path="/checkout" element={<CheckoutPage/>}/>
+                    <Route path="/orders" element={<OrdersPage/>}/>
                     <Route path="/*" element={<h1>404 Not Found</h1>}/>
                 </Routes>
             </div>

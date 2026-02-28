@@ -62,6 +62,13 @@ export default function ProductOverviewPage() {
                         </div>
                     </div>
 
+                    {/* Alternative Names */}
+                    {product.alternativeNames && product.alternativeNames.length > 0 && (
+                        <h3 className="text-md text-gray-500">
+                            {product.alternativeNames.join(" | ")}
+                        </h3>
+                    )}
+
                     <p className="text-gray-700 leading-relaxed text-justify">
                         {product.description}
                     </p>

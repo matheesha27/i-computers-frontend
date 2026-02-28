@@ -22,7 +22,7 @@ export default function Header() {
             <div className="absolute h-full right-24 top-0 items-center hidden lg:flex">
                 <UserData/>
             </div>
-            <Link to="/cart" className="absolute right-4 top-1/2 translate-y-1/2 text-primary text-2xl">
+            <Link to="/cart" className="absolute right-8 top-1/2 translate-y-1/2 text-primary text-2xl">
                 <BiShoppingBag/>
             </Link>
 
