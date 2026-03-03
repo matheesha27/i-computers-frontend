@@ -37,7 +37,6 @@ export default function ContactPage() {
     return (
         <div className="w-full h-[calc(100vh-100px)] bg-[url(/login.jpg)] bg-center bg-cover bg-no-repeat flex">
 
-            {/* Left Section */}
             <div className="w-1/2 h-full flex flex-col justify-center items-center px-10 bg-black/40">
                 <img
                     src="/logo.png"
@@ -61,7 +60,6 @@ export default function ContactPage() {
                 </div>
             </div>
 
-            {/* Right Section */}
             <div className="w-1/2 h-full flex justify-center items-center">
                 <form
                     onSubmit={submitForm}

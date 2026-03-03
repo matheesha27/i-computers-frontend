@@ -4,7 +4,6 @@ export default function HomeLandingPage() {
     return (
         <div className="w-full h-[calc(100vh-100px)] bg-[url(/login.jpg)] bg-center bg-cover bg-no-repeat flex">
             
-            {/* Left Section */}
             <div className="w-1/2 h-full flex flex-col justify-center items-center px-10 bg-black/40">
                 <img
                     src="/logo.png"
@@ -22,7 +21,6 @@ export default function HomeLandingPage() {
                 </p>
             </div>
 
-            {/* Right Section */}
             <div className="w-1/2 h-full flex justify-center items-center">
                 <div className="w-[420px] backdrop-blur-md bg-white/10 shadow-2xl rounded-2xl p-10 flex flex-col items-center">
                     

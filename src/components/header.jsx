@@ -12,7 +12,7 @@ export default function Header() {
     return(
         <header className="w-full h-[100px] bg-secondary flex relative">
             <LuListCollapse onClick={() => {setSideBarOpen(true)}} className="text-white my-auto text-3xl ml-6 lg:hidden z-10"/>
-            <img src="/logo.png" className="h-full" alt="logo"/>
+            <img src="/logo.png" className="h-[90px] p-2" alt="logo"/>
             <div className="w-full h-full hidden lg:flex justify-center items-center gap-[40px] text-primary text-xl">
                 <Link to="/" className="hover:text-accent">Home</Link>
                 <Link to="/products" className="hover:text-accent">Products</Link>
