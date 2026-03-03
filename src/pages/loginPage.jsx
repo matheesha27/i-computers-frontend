@@ -42,7 +42,6 @@ export default function LoginPage() {
         console.log("Login button clicked")
         setIsLoading(true);
 
-        //check adding the URL part into .env
         try {
             const res = await axios.post(import.meta.env.VITE_BACKEND_URL + "/api/user/login", {
                 email: email,
@@ -51,8 +50,6 @@ export default function LoginPage() {
             console.log(res)
 
             localStorage.setItem("token", res.data.token)
-
-            const token = localStorage.getItem("token")
 
             // Navigating
             if (res.data.role == "admin") {
@@ -64,12 +61,12 @@ export default function LoginPage() {
             }
             toast.success("Login Successfull! Welcome!")
             setIsLoading(false);
+
         } catch(error) {
             toast.error("Login Failed! Please check your credentials and try again.")
             console.log("Login error: " + error)
             setIsLoading(false);
         }
-
     }
 
     return(
