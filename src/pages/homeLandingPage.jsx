@@ -2,58 +2,83 @@ import { Link } from "react-router-dom";
 
 export default function HomeLandingPage() {
     return (
-        <div className="w-full h-[calc(100vh-100px)] bg-[url(/login.jpg)] bg-center bg-cover bg-no-repeat flex">
-            
-            <div className="w-1/2 h-full flex flex-col justify-center items-center px-10 bg-black/40">
+        <div className="w-full min-h-[calc(100vh-100px)] 
+                        bg-[url(/login.jpg)] bg-cover bg-center bg-no-repeat
+                        flex flex-col lg:flex-row">
+
+            {/* LEFT SECTION */}
+            <div className="w-full lg:w-1/2 min-h-[50vh] lg:min-h-full
+                            flex flex-col justify-center items-center
+                            bg-black/50 px-6 text-center">
+
                 <img
                     src="/logo.png"
-                    alt="logo"
-                    className="w-[200px] h-[200px] object-contain mb-6"
+                    alt="iComputers Logo"
+                    className="w-[140px] sm:w-[180px] mb-6 drop-shadow-2xl"
                 />
 
-                <h1 className="text-5xl font-semibold text-accent text-center mb-4">
-                    Plug In. Power Up. Perform.
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl
+                               font-extrabold text-accent tracking-wide">
+                    iComputers
                 </h1>
 
-                <p className="text-2xl text-gray-100 italic text-center max-w-xl">
-                    Your ultimate destination for computers, accessories, and
-                    high-performance tech.
+                <p className="text-primary text-sm sm:text-base italic mt-2">
+                    (Pvt.) Ltd.
                 </p>
-            </div>
 
-            <div className="w-1/2 h-full flex justify-center items-center">
-                <div className="w-[420px] backdrop-blur-md bg-white/10 shadow-2xl rounded-2xl p-10 flex flex-col items-center">
-                    
-                    <h2 className="text-3xl font-light text-primary mb-6">
-                        Get Started
-                    </h2>
+                <p className="mt-6 text-lg sm:text-xl lg:text-2xl
+                              text-primary font-semibold italic max-w-xl">
+                    Plug In. Power Up. Perform.
+                </p>
 
+                <p className="mt-4 text-primary/80 max-w-xl text-sm sm:text-base">
+                    Sri Lanka’s growing online destination for computers, laptops,
+                    mobile phones and accessories.
+                </p>
+
+                {/* CTA Buttons */}
+                <div className="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                     <Link
                         to="/products"
-                        className="w-full text-center py-3 mb-4 rounded-lg bg-accent text-black font-bold
-                                   hover:bg-transparent hover:text-primary border border-accent transition-all"
+                        className="px-8 py-3 rounded-lg bg-accent text-black
+                                   font-bold hover:bg-accent/80 transition shadow-lg text-center"
                     >
                         Browse Products
                     </Link>
 
                     <Link
-                        to="/cart"
-                        className="w-full text-center py-3 mb-4 rounded-lg bg-accent text-black font-bold
-                                   hover:bg-transparent hover:text-primary border border-accent transition-all"
-                    >
-                        View Cart
-                    </Link>
-
-                    <Link
                         to="/login"
-                        className="w-full text-center py-3 rounded-lg border border-primary text-primary
-                                   hover:bg-accent hover:text-black transition-all"
+                        className="px-8 py-3 rounded-lg border-2 border-accent
+                                   text-accent font-bold hover:bg-accent hover:text-black
+                                   transition shadow-lg text-center"
                     >
                         Login / Register
                     </Link>
+                </div>
+            </div>
 
-                    <p className="text-gray-300 text-sm mt-6 text-center">
-                        Fast delivery • Secure payments • Trusted products
+            {/* RIGHT SECTION */}
+            <div className="w-full lg:w-1/2 min-h-[50vh] lg:min-h-full
+                            flex justify-center items-center p-6">
+
+                <div className="w-full max-w-lg backdrop-blur
+                                bg-white/10 rounded-2xl shadow-2xl
+                                p-6 sm:p-8 text-primary">
+
+                    <h2 className="text-2xl sm:text-3xl font-semibold mb-4 text-accent">
+                        Why iComputers?
+                    </h2>
+
+                    <ul className="space-y-3 text-sm sm:text-base">
+                        <li>🚀 Modern & fast online shopping experience</li>
+                        <li>🖥️ Computers, laptops, mobiles & accessories</li>
+                        <li>🔐 Secure authentication & checkout</li>
+                        <li>📦 Smart cart & order tracking</li>
+                        <li>⚙️ Built with scalable modern technologies</li>
+                    </ul>
+
+                    <p className="mt-6 text-xs sm:text-sm italic text-primary/70">
+                        * Website is currently under development — base functionality implemented.
                     </p>
                 </div>
             </div>

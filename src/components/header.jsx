@@ -1,75 +1,107 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { BiShoppingBag } from "react-icons/bi";
-import { CiMenuBurger } from "react-icons/ci";
-import { useState } from "react";
 import { LuListCollapse } from "react-icons/lu";
+import { useState } from "react";
 import UserData from "./userData";
 
 export default function Header() {
 
     const [sideBarOpen, setSideBarOpen] = useState(false);
 
-    return(
-        <header className="w-full h-[100px] bg-secondary flex relative">
-            <LuListCollapse onClick={() => {setSideBarOpen(true)}} className="text-white my-auto text-3xl ml-6 lg:hidden z-10"/>
-            <img src="/logo.png" className="h-[90px] p-2" alt="logo"/>
-            <div className="w-full h-full hidden lg:flex justify-center items-center gap-[40px] text-primary text-xl">
-                <Link to="/" className="hover:text-accent">Home</Link>
-                <Link to="/products" className="hover:text-accent">Products</Link>
-                <Link to="/about" className="hover:text-accent">About</Link>
-                <Link to="/contact" className="hover:text-accent">Contact Us</Link>
+    const navLinkClass = ({ isActive }) =>
+        `relative px-2 py-1 transition
+         ${isActive ? "text-accent after:w-full" : "text-primary after:w-0"}
+         after:absolute after:left-0 after:-bottom-1 after:h-[2px]
+         after:bg-accent after:transition-all after:duration-300`;
+
+    return (
+        <header className="w-full h-[100px] bg-secondary shadow-lg sticky top-0 z-30">
+            <div className="max-w-7xl mx-auto h-full flex items-center px-6 relative">
+
+                {/* Mobile Menu Icon */}
+                <LuListCollapse
+                    onClick={() => setSideBarOpen(true)}
+                    className="text-primary text-3xl mr-4 lg:hidden cursor-pointer hover:text-accent transition"
+                />
+
+                {/* Logo */}
+                <Link to="/" className="flex items-center gap-2">
+                    <img
+                        src="/logo.png"
+                        className="h-[70px] object-contain"
+                        alt="iComputers logo"
+                    />
+                    <div className="hidden sm:block">
+                        <p className="text-primary font-bold text-lg leading-none">
+                            iComputers
+                        </p>
+                        <span className="text-xs text-primary/70">
+                            (Pvt.) Ltd.
+                        </span>
+                    </div>
+                </Link>
+
+                {/* Desktop Navigation */}
+                <nav className="hidden lg:flex flex-1 justify-center items-center gap-10 text-lg">
+                    <NavLink to="/" className={navLinkClass}>Home</NavLink>
+                    <NavLink to="/products" className={navLinkClass}>Products</NavLink>
+                    <NavLink to="/about" className={navLinkClass}>About</NavLink>
+                    <NavLink to="/contact" className={navLinkClass}>Contact</NavLink>
+                </nav>
+
+                {/* Right Icons */}
+                <div className="flex items-center gap-6 ml-auto">
+                    <UserData />
+
+                    <Link
+                        to="/cart"
+                        className="relative text-primary text-2xl ml-4 hover:text-accent transition"
+                    >
+                        <BiShoppingBag />
+                    </Link>
+                </div>
             </div>
-            <div className="absolute h-full right-24 top-0 items-center hidden lg:flex">
-                <UserData/>
-            </div>
-            <Link to="/cart" className="absolute right-8 top-1/2 translate-y-1/2 text-primary text-2xl">
-                <BiShoppingBag/>
-            </Link>
 
-            {sideBarOpen &&
-                <div className="fixed w-[100vw] h-screen top-0 left-0 bg-black/40 z-20 transition-all duration-300">
-                    <div className="w-[250px] h-screen flex flex-col relative">
-                        <div className="absolute w-full h-full bg-secondary/90 left-[-250px] transform-flat translate-x-[250px] transition-transform duration-700 flex flex-col">
-                            
-                            <div className="w-full h-[100px] bg-secondary flex justify-center items-center">
-                                <img src="/logo.png" className="h-full" alt="logo"/>
-                                <LuListCollapse onClick={() => {setSideBarOpen(false)}} className="text-white my-auto text-2xl ml-6 lg:hidden rotate-180"/>
+            {/* Mobile Sidebar */}
+            {sideBarOpen && (
+                <div className="fixed inset-0 bg-black/40 z-40">
+                    <div className="w-[260px] h-full bg-secondary shadow-2xl
+                                    transform translate-x-0 transition-transform duration-500">
+
+                        {/* Sidebar Header */}
+                        <div className="h-[100px] flex items-center px-4 border-b border-primary/10">
+                            <img src="/logo.png" className="h-[70px]" alt="logo" />
+                            <LuListCollapse
+                                onClick={() => setSideBarOpen(false)}
+                                className="text-primary text-2xl ml-auto rotate-180 cursor-pointer"
+                            />
+                        </div>
+
+                        {/* Sidebar Links */}
+                        <div className="flex flex-col text-lg text-primary">
+                            {[
+                                { to: "/", label: "Home" },
+                                { to: "/products", label: "Products" },
+                                { to: "/about", label: "About" },
+                                { to: "/contact", label: "Contact" },
+                            ].map(({ to, label }) => (
+                                <Link
+                                    key={label}
+                                    to={to}
+                                    onClick={() => setSideBarOpen(false)}
+                                    className="px-6 py-4 hover:bg-accent/20 hover:text-accent transition"
+                                >
+                                    {label}
+                                </Link>
+                            ))}
+
+                            <div className="mt-auto p-4 border-t border-primary/10">
+                                <UserData />
                             </div>
-
-                            <div className="w-full h-full flex flex-col text-xl text-primary justify-start items-start">
-                                <a href="/"
-                                    onClick={() => {setSideBarOpen(false)}}
-                                    className="w-full px-4 py-4 hover:bg-secondary transition">
-                                        Home
-                                </a>
-
-                                <a href="/products"
-                                    onClick={() => {setSideBarOpen(false)}}
-                                    className="w-full px-4 py-4 hover:bg-secondary transition">
-                                        Products
-                                </a>
-
-                                <a href="/about"
-                                    onClick={() => {setSideBarOpen(false)}}
-                                    className="w-full px-4 py-4 hover:bg-secondary transition">
-                                        About
-                                </a>
-
-                                <a href="/contact"
-                                    onClick={() => {setSideBarOpen(false)}}
-                                    className="w-full px-4 py-4 hover:bg-secondary transition">
-                                        Contact
-                                </a>
-                                
-                                <div className="w-full flex justify-center bg-secondary py-2">
-                                    <UserData/>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>
-            }
+            )}
         </header>
-    )
+    );
 }
