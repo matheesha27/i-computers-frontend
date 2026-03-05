@@ -82,7 +82,7 @@ export default function LoginPage() {
                 </p>
             </div>
 
-            <div className="w-full lg:w-[50%] h-full flex justify-center items-center"> {/*Right half*/}
+            <div className="w-[50%] h-full flex justify-center items-center relative overflow-hidden"> {/*Right half*/}
                 <div className="w-[450px] h-[600px] backdrop-blur shadow-2xl rounded-xl flex flex-col justify-center items-center"> {/*Blured area*/}
                     <h1 className="text-3xl font-light text-primary text-shadow-amber-600 text-shadow-[5px]">
                         Login

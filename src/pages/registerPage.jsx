@@ -63,7 +63,8 @@ export default function RegisterPage() {
 
     return(
         <div className="w-full h-screen bg-[url(/login.jpg)] bg-center bg-cover bg-no-repeat flex">
-            <div className="w-[50%] h-full flex flex-col justify-center items-center"> {/*Left half*/}
+
+            <div className="hidden w-[50%] h-full lg:flex flex-col justify-center items-center"> {/*Left half*/}
                 <img src="logo.png" alt="logo" className="w-[200px] h-[200px] object-cover"/>
                 <h1 className="text-5xl font-semibold text-accent shadow-4xl">
                     Plug In. Power Up. Plugin.
@@ -73,7 +74,7 @@ export default function RegisterPage() {
                 </p>
             </div>
 
-            <div className="w-[50%] h-full flex justify-center items-center"> {/*Right half*/}
+            <div className="w-full lg:w-[50%] h-full flex justify-center items-center"> {/*Right half*/}
                 <div className="w-[450px] h-[600px] backdrop-blur shadow-2xl rounded-xl flex flex-col justify-center items-center"> {/*Blured area*/}
                     <h1 className="text-3xl font-light text-primary text-shadow-amber-600 text-shadow-[5px]">
                         Register
