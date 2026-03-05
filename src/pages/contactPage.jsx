@@ -17,56 +17,65 @@ export default function ContactPage() {
         }
 
         try {
-            const res = await axios.post(import.meta.env.VITE_BACKEND_URL + "/api/support/send-support-message", {
-                senderEmail: email,
-                senderName: name,
-                senderMessage: message
-            })
-            console.log(res)
+            const res = await axios.post(
+                import.meta.env.VITE_BACKEND_URL + "/api/support/send-support-message",
+                {
+                    senderEmail: email,
+                    senderName: name,
+                    senderMessage: message
+                }
+            );
+
+            console.log(res);
             toast.success("Message sent successfully!");
 
-        } catch(error) {
-            toast.error("Message sending failed!")
-            console.log(error)
+        } catch (error) {
+            toast.error("Message sending failed!");
+            console.log(error);
         }
+
         setName("");
         setEmail("");
         setMessage("");
     }
 
     return (
-        <div className="w-full h-[calc(100vh-100px)] bg-[url(/login.jpg)] bg-center bg-cover bg-no-repeat flex">
+        <div className="w-full min-h-[calc(100vh-100px)] bg-[url(/login.jpg)] bg-center bg-cover bg-no-repeat flex flex-col lg:flex-row">
 
-            <div className="w-1/2 h-full flex flex-col justify-center items-center px-10 bg-black/40">
+            <div className="w-full lg:w-1/2 flex flex-col justify-center items-center px-6 lg:px-10 py-10 bg-black/40 text-center">
+
                 <img
                     src="/logo.png"
                     alt="logo"
-                    className="w-[180px] h-[180px] object-contain mb-6"
+                    className="w-[120px] h-[120px] lg:w-[180px] lg:h-[180px] object-contain mb-6"
                 />
 
-                <h1 className="text-5xl font-semibold text-accent mb-4">
+                <h1 className="text-3xl lg:text-5xl font-semibold text-accent mb-4">
                     Contact Us
                 </h1>
 
-                <p className="text-2xl text-gray-100 italic text-center max-w-xl">
+                <p className="text-lg lg:text-2xl text-gray-100 italic max-w-xl">
                     Have questions? Need help choosing the right tech?
                     We’re here to help.
                 </p>
 
-                <div className="mt-8 text-gray-200 text-lg space-y-2 text-center">
+                <div className="mt-8 text-gray-200 text-base lg:text-lg space-y-2">
                     <p>📍 Colombo, Sri Lanka</p>
                     <p>📞 +94 77 539 9695</p>
                     <p>✉️ matheesha27@gmail.com</p>
                 </div>
+
             </div>
 
-            <div className="w-1/2 h-full flex justify-center items-center">
+            <div className="w-full lg:w-1/2 flex justify-center items-center px-4 py-10">
+
                 <form
                     onSubmit={submitForm}
-                    className="w-[450px] backdrop-blur-md bg-white/10 shadow-2xl
-                               rounded-2xl p-10 flex flex-col items-center"
+                    className="w-full max-w-md backdrop-blur-md bg-white/10 shadow-2xl
+                               rounded-2xl p-8 flex flex-col items-center"
                 >
-                    <h2 className="text-3xl font-light text-primary mb-6">
+
+                    <h2 className="text-2xl lg:text-3xl font-light text-primary mb-6 text-center">
                         Send Us a Message
                     </h2>
 
@@ -109,6 +118,7 @@ export default function ContactPage() {
                     >
                         Send Message
                     </button>
+
                 </form>
             </div>
         </div>
