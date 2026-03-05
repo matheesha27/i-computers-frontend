@@ -98,7 +98,7 @@ export default function ProductOverviewPage() {
             }
             {
                 status == "success" &&
-                <div className="w-full h-[calc(100vh-100px)] flex flex-col lg:flex-row">
+                <div className="w-full min-h-[calc(100vh-100px)] flex flex-col lg:flex-row">
                     <h1 className="lg:hidden m-2 text-3xl font-semibold text-gray-900 text-center sticky top-0 bg-white">
                         {product.name}
                     </h1>
@@ -144,7 +144,7 @@ export default function ProductOverviewPage() {
                         </div>
 
                         {/*Add to Cart & Buy Now section */}
-                        <div className="w-[400px] flex gap-4 mt-4 mb-4">
+                        <div className="w-full max-w-md flex flex-col sm:flex-row gap-4 mt-4 mb-4">
                             <button className="flex-1 bg-secondary text-white py-3 rounded-lg font-medium
                                            hover:bg-secondary/80 transition" onClick={() => {
                                     addToCart(product, 1)
@@ -170,18 +170,22 @@ export default function ProductOverviewPage() {
                             </button>
                         </div>
 
-                        <div className="hidden lg:block text-2xl font-semibold text-secondary">
-                            <div className="w-full bg-white/10 backdrop-blur rounded-xl">
+                        <div className="w-full mt-6 text-secondary">
+                            <div className="w-full bg-white/10 backdrop-blur rounded-xl p-4 sm:p-6">
 
-                                <h2 className="text-2xl font-semibold text-secondary mb-4">
+                                <h2 className="text-xl sm:text-2xl font-semibold text-secondary mb-4">
                                     Customer Reviews
                                 </h2>
 
                                 {/* Review List */}
-                                {loadingReviews && <p>Loading reviews...</p>}
+                                {loadingReviews && (
+                                    <p className="text-sm text-gray-400">Loading reviews...</p>
+                                )}
 
                                 {!loadingReviews && reviews.length === 0 && (
-                                    <p className="text-gray-400">No reviews yet. Be the first!</p>
+                                    <p className="text-gray-400 text-sm">
+                                        No reviews yet. Be the first!
+                                    </p>
                                 )}
 
                                 <div className="space-y-4">
@@ -190,15 +194,19 @@ export default function ProductOverviewPage() {
                                             key={index}
                                             className="p-4 rounded-lg border border-secondary/20 bg-secondary/5"
                                         >
-                                            <div className="flex justify-between items-center mb-1">
-                                                <p className="font-semibold text-text">
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-1 gap-1">
+                                                <p className="font-semibold text-text text-sm sm:text-base break-all">
                                                     {review.email}
                                                 </p>
-                                                <p className="text-accent font-bold">
+
+                                                <p className="text-accent font-bold text-sm sm:text-base">
                                                     ⭐ {review.rating}
                                                 </p>
                                             </div>
-                                            <p className="text-text/90">{review.comment}</p>
+
+                                            <p className="text-text/90 text-sm sm:text-base">
+                                                {review.comment}
+                                            </p>
                                         </div>
                                     ))}
                                 </div>
@@ -206,11 +214,13 @@ export default function ProductOverviewPage() {
                                 {/* Submit Review */}
                                 {localStorage.getItem("token") && (
                                     <div className="mt-8 border-t border-secondary/20 pt-6">
-                                        <h3 className="text-xl font-semibold mb-3 text-secondary">
+
+                                        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-secondary">
                                             Write a Review
                                         </h3>
 
                                         <div className="flex flex-col sm:flex-row gap-4 mb-4">
+
                                             <select
                                                 value={rating}
                                                 onChange={(e) => setRating(e.target.value)}
@@ -234,10 +244,11 @@ export default function ProductOverviewPage() {
 
                                         <button
                                             onClick={submitReview}
-                                            className="px-6 py-2 mb-4 bg-accent text-primary text-lg rounded-md hover:bg-accent/90 transition"
+                                            className="w-full sm:w-auto px-6 py-2 bg-accent text-primary text-lg rounded-md hover:bg-accent/90 transition"
                                         >
                                             Submit Review
                                         </button>
+
                                     </div>
                                 )}
                             </div>
